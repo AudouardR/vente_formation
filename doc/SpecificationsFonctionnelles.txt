@@ -1,0 +1,5 @@
+Spécifications techniques
+
+Un utilisateur non-connecté peut afficher toutes les formations disponibles, afficher celles qui incluent un mot clé, ou afficher les formations en présentiel ou en distanciel. Il ne peut pas constituer de panier, il doit être connecté pour cela. S'il essaye, il sera redirigé vers la création de compte, où il doit renseigner un login et un mot de passe.
+
+Un utilisateur connecté peut associer son compte à un ou plusieurs clients. Au nom d'un client, il peut constituer un panier, ajouter ou supprimer des formations de ce panier, et passer la commande une fois les formations ajoutées au panier.
