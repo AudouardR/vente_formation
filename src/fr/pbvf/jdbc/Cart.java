@@ -23,20 +23,27 @@ public class Cart {
 	
 	// Constructeurs
 	
+	/**
+	 * Constructeur sans ID (objet à garder en mémoire)
+	 * 
+	 * @param customer
+	 */
 	public Cart(Customer customer) {
-		/**
-		 * Constructeur sans ID (objet à garder en mémoire)
-		 */
 		setIdCart(nextId);
 		setCustomer(customer);
 		setIsOrdered(false);
 		nextId++;
 	}
 	
+	/**
+	 * Constructeur avec ID (objet temporaire, pour le retourner dans une fonction par exemple)
+	 * 
+	 * @param idCart
+	 * @param customer
+	 * @param isOrdered
+	 * @param courses
+	 */
 	public Cart(int idCart, Customer customer, boolean isOrdered, List<Course> courses) {
-		/**
-		 * Constructeur avec ID (objet temporaire, pour le retourner dans une fonction par exemple)
-		 */
 		setIdCart(idCart);
 		setCustomer(customer);
 		setIsOrdered(isOrdered);
@@ -65,42 +72,53 @@ public class Cart {
 		this.isOrdered = isOrdered;
 	}
 	
+	/**
+	 * Retourne les formations du panier
+	 * 
+	 * @return
+	 */
 	public List<Course> getCourses() {
-		/**
-		 * Retourne les formations du panier
-		 */
 		return courses;
 	}
+	/**
+	 * Ajoute une liste pré-remplie de formations au panier
+	 * 
+	 * @param courses
+	 */
 	public void setCourses(List<Course> courses) {
-		/**
-		 * Ajoute une liste pré-remplie de formations au panier
-		 */
 		this.courses = courses;
 	}
 	
+	/**
+	 * Ajoute une formation dans le panier
+	 * 
+	 * @param course
+	 */
 	public void addCourse(Course course) {
-		/**
-		 * Ajoute une formation dans le panier
-		 */
 		getCourses().add(course);
 	}
+	/**
+	 * Retire une formation du panier si elle existe (retourne vrai si c'est le cas, faux sinon)
+	 * 
+	 * @param course
+	 * @return
+	 */
 	public boolean removeCourse(Course course) {
-		/**
-		 * Retire une formation du panier si elle existe (retourne vrai si c'est le cas, faux sinon)
-		 */
 		return getCourses().remove(course);
 	}
 	
+	/**
+	 * Définit le panier comme commandé lorsque l'utilisateur le commande
+	 */
 	public void order() {
-		/**
-		 * Définit le panier comme commandé lorsque l'utilisateur le commande
-		 */
 		setIsOrdered(true);
 	}
+	/**
+	 * Retourne le prix total des articles du panier
+	 * 
+	 * @return
+	 */
 	public double getTotalPrice() {
-		/**
-		 * Retourne le prix total des articles du panier
-		 */
 		double totalPrice = 0;
 		for (Course course: getCourses()) {
 			totalPrice += course.getPrice();
@@ -109,9 +127,6 @@ public class Cart {
 	}
 	
 	public String toString() {
-		/**
-		 * Représentation en String du panier
-		 */
 		String str = getIdCart() + ") Panier de " + getCustomer().getFirstName() + " " + getCustomer().getLastName() + ", " + (getIsOrdered() ? "Commandé" : "En attente") + " :";
 		for (Course c: getCourses()) {
 			str += "\n- " + c;
