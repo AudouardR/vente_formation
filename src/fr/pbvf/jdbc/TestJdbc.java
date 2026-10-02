@@ -150,6 +150,28 @@ public class TestJdbc {
 			}
 			System.out.println();
 			
+			// Afficher les formations stockées en base de données sous forme de tableau
+			
+			System.out.printf("%2s | %-20s | %-8s | %-30s | %-12s | %8s%n",
+						      "ID", "Formation", "Jours", "Programme", "Modalité", "Prix");
+
+			System.out.println("-----------------------------------------------------------------------------------------------");
+			try {
+				for(Course c: courseDao.findByKeyword("Java", connection)) {
+					System.out.printf("%2s | %-20s | %-8d | %-30s | %-12s | %7.2f€%n",
+							c.getIdCourse(),
+			                c.getName(), 
+							c.getDays(), 
+							c.getDescription(), 
+							c.getIsRemote() ? "Distanciel" : "Présentiel", 
+							c.getPrice());
+				}
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println();
+			
 			// Modifier l'utilisateur BretM
 			String bretMOldUsername = martial.getUsername();
 			martial.setUsername("MartialBret");

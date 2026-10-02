@@ -72,6 +72,34 @@ public class CourseDao implements Dao<Course, Integer> {
 		
 		return null;
 	}
+	
+	public List<Course> findByKeyword(String keyword, Connection connection) {
+		String sql = "SELECT * FROM Course WHERE name LIKE ? OR description LIKE ?";
+		List<Course> courses = new ArrayList<>();
+		
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+			ps.setString(1, "%"+keyword+"%");
+			ps.setString(2, "%"+keyword+"%");
+			
+			try (ResultSet rs = ps.executeQuery()) {
+		        while (rs.next()) {
+		            courses.add(new Course(
+		                rs.getInt("id_course"),
+		                rs.getString("name"),
+		                rs.getString("description"),
+		                rs.getInt("days"),
+		                rs.getBoolean("is_remote"),
+		                rs.getDouble("price")
+		            ));
+		        }
+			}
+	    } 
+	    catch (SQLException e) {
+	        throw new RuntimeException("Erreur lors de la recherche des formations", e);
+	    }
+
+	    return courses;
+	}
 
 	@Override
 	public List<Course> findAll(Connection connection) {
